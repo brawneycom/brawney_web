@@ -1,0 +1,28 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: oven-sh/setup-bun@v1
+      - run: bun i
+      - run: bun run build
+      - name: deploy
+        uses: cloudflare/pages-action@v1
+        with:
+          directory: "./build/client"
+          projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
