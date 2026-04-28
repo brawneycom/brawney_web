@@ -28,8 +28,8 @@ jobs:
 
       - name: Build
         env:
-          VITE_API_URL:  https://api.brawney.dev
-          VITE_AUTH_URL: https://auth.brawney.dev
+          VITE_API_URL:  https://api.brawney.com
+          VITE_AUTH_URL: https://auth.brawney.com
         run: bun run build
 
 
