@@ -1,0 +1,25 @@
+FROM oven/bun:1
+
+WORKDIR /app
+
+# Install libatomic required by @cloudflare/workerd on arm64
+RUN apt-get update && apt-get install -y libatomic1 && rm -rf /var/lib/apt/lists/*
+
+COPY package.json bun.lock ./
+COPY packages/ ./packages/
+RUN NODE_TLS_REJECT_UNAUTHORIZED=0 bun install --frozen-lockfile
+
+COPY . .
+
+# Build-time env vars for local dev
+ARG VITE_API_URL=http://api.brawney.local
+ARG VITE_AUTH_URL=http://auth.brawney.local
+ENV VITE_API_URL=${VITE_API_URL}
+ENV VITE_AUTH_URL=${VITE_AUTH_URL}
+RUN printf 'VITE_API_URL=%s\nVITE_AUTH_URL=%s\n' "${VITE_API_URL}" "${VITE_AUTH_URL}" > .env.local
+
+EXPOSE 5173
+
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+CMD ["bun", "run", "dev", "--", "--port", "5173", "--host", "0.0.0.0"]

@@ -1,0 +1,30 @@
+name: pull request
+
+on:
+  pull_request:
+    branches: [main, staging]
+    types: [labeled]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'ready_for_review'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun i
+
+      - name: Test
+        run: bun run test
+
+      - name: Typecheck
+        run: bun run typecheck

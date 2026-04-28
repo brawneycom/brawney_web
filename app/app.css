@@ -1,0 +1,6 @@
+@layer reset, base, tokens, recipes, utilities;
+
+body {
+  -webkit-font-smoothing: antialiased;
+  /* background-color: #151720; */
+}

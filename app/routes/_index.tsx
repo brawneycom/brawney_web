@@ -1,16 +1,10 @@
-import type { MetaFunction } from "@remix-run/node";
+import { SearchProvider } from "~/contexts/SearchContext";
+import { HomeScreen } from "~/pages/home";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
-
-export default function Index() {
+export default function HomeRoute() {
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Brawney</h1>
-    </div>
+    <SearchProvider>
+      <HomeScreen />
+    </SearchProvider>
   );
 }
