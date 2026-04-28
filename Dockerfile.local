@@ -1,0 +1,26 @@
+FROM oven/bun:1
+
+WORKDIR /app
+
+# Install libatomic required by @cloudflare/workerd on arm64
+RUN apt-get update && apt-get install -y libatomic1 && rm -rf /var/lib/apt/lists/*
+
+COPY package.json bun.lock ./
+COPY packages/ ./packages/
+RUN NODE_TLS_REJECT_UNAUTHORIZED=0 bun install --frozen-lockfile
+
+COPY . .
+
+# Build-time env vars for local dev
+ARG VITE_AUTH_URL=http://auth.bolanos.local
+ARG VITE_ADMIN_URL=http://admin.bolanos.local
+ENV VITE_AUTH_URL=${VITE_AUTH_URL}
+ENV VITE_ADMIN_URL=${VITE_ADMIN_URL}
+RUN printf 'VITE_AUTH_URL=%s\nVITE_ADMIN_URL=%s\n' "${VITE_AUTH_URL}" "${VITE_ADMIN_URL}" > .env.local
+
+EXPOSE 3001
+
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# Run in Vite dev mode — no build step, hot reload, no Cloudflare worker runtime needed
+CMD ["bun", "run", "dev", "--", "--port", "3001", "--host", "0.0.0.0"]

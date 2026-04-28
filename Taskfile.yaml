@@ -1,0 +1,24 @@
+version: "3"
+
+tasks:
+  build:
+    cmds:
+      - bun run build
+
+  prod:build:staging:
+    cmds:
+      - VITE_API_URL=https://api-staging.brawney.dev VITE_AUTH_URL=https://auth-staging.brawney.dev bun run build
+
+  prod:build:
+    cmds:
+      - VITE_API_URL=https://api.brawney.dev VITE_AUTH_URL=https://auth.brawney.dev bun run build
+
+  prod:deploy:staging:
+    cmds:
+      - task: prod:build:staging
+      - doppler run --project devops --config prod -- bun x wrangler pages deploy ./dist --project-name brawney-web --branch staging --commit-dirty=true
+
+  prod:deploy:
+    cmds:
+      - task: prod:build
+      - doppler run --project devops --config prod -- bun x wrangler pages deploy ./dist --project-name brawney-web --branch main --commit-dirty=true
