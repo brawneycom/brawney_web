@@ -1,0 +1,91 @@
+import { Unstyled } from "@storybook/blocks";
+import { Section } from '@bennie-ui/section'
+
+# Flex 
+
+## Grow(1):row
+
+Example
+```
+<Section flex={{ direction: "row" }}>
+    <Section>Item 1</Section>
+    <Section flex={{ grow: '1' }}>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+
+```
+
+<Unstyled>
+  <Section flex={{ direction: "row"}} width={{value: 'full'}} colors={{ background: { color: 'teal'}}}>
+    <Section margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 1</Section>
+    <Section flex={{ grow: '1' }} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 2</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 3</Section>
+  </Section>
+</Unstyled>
+
+
+## Grow(1):col
+
+Example
+```
+<Section flex={{ direction: "col" }}>
+    <Section>Item 1</Section>
+    <Section flex={{ grow: '1' }}>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+
+```
+
+<Unstyled>
+  <Section flex={{ direction: "col"}} height={{ value: '80' }} colors={{ background: { color: 'teal'}}} >
+    <Section margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 1</Section>
+    <Section flex={{ grow: '1' }} margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 2</Section>
+    <Section margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 3</Section>
+  </Section>
+</Unstyled>
+
+
+## Grow(0):row
+prevent the item from growing
+Example
+```
+<Section flex={{ direction: "row" }}>
+    <Section>Item 1</Section>
+    <Section flex={{ grow: '1' }}>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+
+```
+
+<Unstyled>
+  <Section flex={{ direction: "row"}} width={{value: 'full'}} colors={{ background: { color: 'teal'}}}>
+    <Section margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 1</Section>
+    <Section flex={{ grow: '0' }} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 2</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 3</Section>
+  </Section>
+</Unstyled>
+
+
+## Grow(0):col
+Prevent the item from growing
+Example
+```
+<Section flex={{ direction: "col" }}>
+    <Section>Item 1</Section>
+    <Section flex={{ grow: '0' }}>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+
+```
+
+<Unstyled>
+  <Section flex={{ direction: "col"}} height={{ value: '80' }} colors={{ background: { color: 'teal'}}} >
+    <Section margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 1</Section>
+    <Section flex={{ grow: '0' }} margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 2</Section>
+    <Section margin={{y: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 3</Section>
+  </Section>
+</Unstyled>
+
+
+
+

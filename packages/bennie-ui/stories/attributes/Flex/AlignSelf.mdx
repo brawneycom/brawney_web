@@ -1,0 +1,59 @@
+import { Unstyled } from "@storybook/blocks";
+import { Section } from '@bennie-ui/section'
+import { variants } from '@bennie-ui/baseline/tailwind/display/flex'
+
+# Flex 
+
+## alignSelf 
+
+Example
+```
+<Section flex={{ alignItems: 'stretch' }}>
+  <Section flex={{ alignSelf : "auto" }}>
+    <Section>Item 1</Section>
+    <Section>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+</Section>
+
+```
+
+# Compiled tests(row)
+
+<Unstyled>
+  <Section className="grid grid-cols-3">
+  {
+    variants.base.alignSelf.map((value, idx) => {
+      const align_value = value.split('-')[1]
+
+      return <Section margin={{all: '1'}} flex={{ direction:'row', alignItems: 'stretch' }} height={{value:'40'}}   colors={{ background: { color: 'teal'} }}>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+        </Section>
+    })
+  }
+  </Section>
+</Unstyled>
+
+
+# Compiled tests(col)
+
+<Unstyled>
+  <Section className="grid grid-cols-3">
+  {
+    variants.base.alignSelf.map((value, idx) => {
+      const align_value = value.split('-')[1]
+
+      return <Section margin={{all: '1'}} flex={{ direction:'col', alignItems: 'stretch' }} height={{value:'40'}}   colors={{ background: { color: 'teal'} }}>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+          <Section flex={{alignSelf: align_value}} margin={{x: "2"}} padding={{x: '2'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>{align_value}</Section>
+        </Section>
+    })
+  }
+  </Section>
+</Unstyled>
+
+
+

@@ -1,0 +1,13 @@
+{
+  "name": "@bennie-ui/text",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2"
+  }
+}

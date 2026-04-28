@@ -1,0 +1,11 @@
+{
+  "name": "@bennie-ui/constants",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "echo 'lint: (constants)' && exit 0",
+    "test": "echo 'test: (constants)' && exit 0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

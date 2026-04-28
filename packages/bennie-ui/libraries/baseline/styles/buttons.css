@@ -1,0 +1,6 @@
+.button {
+  &[disabled] {
+    cursor: pointer;
+    @apply opacity-50;
+  }
+}

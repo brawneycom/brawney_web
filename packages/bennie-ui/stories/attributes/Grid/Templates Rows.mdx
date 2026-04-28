@@ -1,0 +1,62 @@
+import { Unstyled } from "@storybook/blocks";
+import { Section } from '@bennie-ui/section'
+import { variants } from '@bennie-ui/baseline/tailwind/display/grid'
+
+# Grid 
+
+## Template Rows 
+
+Example
+```
+<Section grid={{ flow: 'col', templates:  { rows: '4'} }}>
+    <Section>Item $</Section>*10
+</Section>
+
+```
+
+# Specify rows
+<Unstyled>
+  <Section margin={{y: '1'}} grid={{ gap:'4', flow: 'col', templates: {rows: '4'}}}  height={{value:'80'}}  width={{value: 'fit'}} colors={{ background: { color: 'teal'} }}>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item</Section>
+  </Section>
+</Unstyled>
+
+
+# Subgrid(row)
+
+```
+<Section grid={{ flow: 'col', templates:  { rows: '4'} }}>
+    <Section>Item $</Section>*5
+    <Section grid={{ templates: { rows: 'subgrid' } }}>
+      <Section 
+        grid={{ start: { rows: '2' } }} 
+        colors={{ background: { color: 'purple'} }}>
+    </Section>
+</Section>
+
+```
+<Unstyled>
+  <Section margin={{y: '1'}} grid={{ flow: 'col', gap:'4', templates: { rows: '4'} }} width={{value: 'fit'}} colors={{ background: { color: 'teal'} }}>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 1</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 2</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 3</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 4</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 5</Section>
+    <Section padding={{x: '2'}} grid={{ gap:'4', span: { rows: '3'}, templates: { rows: 'subgrid'}}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>
+      <Section grid={{ start: { rows: '2' }}} colors={{ background: {color: 'purple'}}}>Item 6</Section>
+    </Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 7</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 8</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 9</Section>
+    <Section padding={{x: '2'}} width={{value: '40'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Item 10</Section>
+  </Section>
+</Unstyled>
+

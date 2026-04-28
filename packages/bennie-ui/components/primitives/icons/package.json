@@ -1,0 +1,13 @@
+{
+  "name": "@bennie-ui/icons",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {},
+  "dependencies": {
+    "react": "^18.2.0",
+    "@heroicons/react": "^2.1.5",
+    "@loadable/component": "^5.16.4",
+    "@bennie-ui/attribute-utils": "workspace:*"
+  },
+  "devDependencies": {}
+}

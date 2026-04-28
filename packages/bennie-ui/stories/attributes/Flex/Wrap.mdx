@@ -1,0 +1,48 @@
+import { Unstyled } from "@storybook/blocks";
+import { Section } from '@bennie-ui/section'
+import { variants } from '@bennie-ui/baseline/tailwind/display/flex'
+
+# Flex 
+
+## Wrap 
+
+Example
+```
+<Section flex={{ wrap : "wrap" }}>
+    <Section>Item 1</Section>
+    <Section>Item 2</Section>
+    <Section>Item 3</Section>
+  </Section>
+
+```
+
+# Wrap:wrap
+<Unstyled>
+  <Section margin={{y: '1'}} flex={{ wrap: 'wrap' }} width={{value:'60'}} colors={{ background: { color: 'teal'} }}>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 1</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 2</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 3</Section>
+  </Section>
+</Unstyled>
+
+# Wrap:wrap-reverse
+<Unstyled>
+  <Section margin={{y: '1'}} flex={{ wrap: 'reverse' }} width={{value:'60'}} colors={{ background: { color: 'teal'} }}>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 1</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 2</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 3</Section>
+  </Section>
+</Unstyled>
+
+
+
+# Wrap:nowrap
+<Unstyled>
+  <Section margin={{y: '1'}} flex={{ wrap: 'nowrap' }} width={{value:'40'}} colors={{ background: { color: 'teal'} }}>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 1</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 2</Section>
+    <Section margin={{x: "2"}} padding={{x: '2'}} width={{value:'20'}} colors={{ text: {color: 'white'}, background: {color: 'sky'}}}>Wrap 3</Section>
+  </Section>
+</Unstyled>
+
+
