@@ -1,63 +1,133 @@
-import { useNavigate } from "react-router-dom";
-import { Text } from "@bennie-ui/text";
-import { Button } from "@bennie-ui/button";
-import { Section } from "@bennie-ui/section";
-import { Page } from "~/components/page";
+import { useNavigate } from "@remix-run/react";
+import { css } from "styled-system/css";
+
+const styles = {
+  page: css({
+    position: "fixed",
+    inset: "0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    bg: "gray.950",
+    _light: { bg: "gray.50" },
+  }),
+  inner: css({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10",
+    maxWidth: "sm",
+    width: "full",
+    px: "6",
+  }),
+  brand: css({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "3",
+  }),
+  logo: css({
+    width: "14",
+    height: "14",
+    borderRadius: "2xl",
+    bg: "blue.600",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "2xl",
+    fontWeight: "bold",
+    color: "white",
+    letterSpacing: "tight",
+  }),
+  title: css({
+    fontSize: "3xl",
+    fontWeight: "bold",
+    color: "gray.50",
+    letterSpacing: "tight",
+    _light: { color: "gray.900" },
+  }),
+  tagline: css({
+    fontSize: "sm",
+    color: "gray.400",
+    textAlign: "center",
+    lineHeight: "relaxed",
+    _light: { color: "gray.500" },
+  }),
+  divider: css({
+    width: "full",
+    height: "px",
+    bg: "gray.800",
+    _light: { bg: "gray.200" },
+  }),
+  actions: css({
+    display: "flex",
+    flexDirection: "column",
+    gap: "3",
+    width: "full",
+  }),
+  btn_primary: css({
+    width: "full",
+    py: "3",
+    borderRadius: "lg",
+    fontSize: "sm",
+    fontWeight: "semibold",
+    cursor: "pointer",
+    transition: "all",
+    transitionDuration: "fast",
+    border: "none",
+    bg: "blue.600",
+    color: "white",
+    _hover: { bg: "blue.500" },
+    _active: { bg: "blue.700" },
+  }),
+  btn_secondary: css({
+    width: "full",
+    py: "3",
+    borderRadius: "lg",
+    fontSize: "sm",
+    fontWeight: "semibold",
+    cursor: "pointer",
+    transition: "all",
+    transitionDuration: "fast",
+    bg: "transparent",
+    color: "gray.300",
+    border: "1px solid token(colors.gray.700)",
+    _hover: { bg: "gray.800", color: "gray.100" },
+    _active: { bg: "gray.700" },
+    _light: {
+      color: "gray.600",
+      borderColor: "gray.300",
+      _hover: { bg: "gray.100", color: "gray.900" },
+    },
+  }),
+};
+
 export function WelcomeScreen() {
   const navigate = useNavigate();
 
   return (
-    <Page>
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "1/6" }}
-      >
-        <Text size="2xl" weight="bold">
-          Welcome to Brawney
-        </Text>
-      </Section>
+    <div className={styles.page}>
+      <div className={styles.inner}>
+        <div className={styles.brand}>
+          <div className={styles.logo}>B</div>
+          <h1 className={styles.title}>Brawney</h1>
+          <p className={styles.tagline}>
+            Track your progress. Stay consistent. Get stronger.
+          </p>
+        </div>
 
-      <Section flex={{ justifyContent: "center" }}>Logo</Section>
+        <div className={styles.divider} />
 
-      <Section flex={{ justifyContent: "center", alignItems: "center" }}>
-        <span style={{
-          display: "inline-block",
-          padding: "4px 12px",
-          borderRadius: "9999px",
-          background: "#fef3c7",
-          color: "#92400e",
-          fontSize: "12px",
-          fontWeight: 600,
-          letterSpacing: "0.05em",
-        }}>
-          🚧 Under Construction
-        </span>
-      </Section>
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "2/6" }}
-      >
-        <Button
-          size="sm"
-          padding={{ x: "8", y: "2" }}
-          colors={{ text: { color: "blue" }, background: { color: "white" } }}
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          size="sm"
-          padding={{ x: "8", y: "2" }}
-          colors={{ text: { color: "blue" }, background: { color: "white" } }}
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          SignUp
-        </Button>
-      </Section>
-    </Page>
+        <div className={styles.actions}>
+          <button className={styles.btn_primary} onClick={() => navigate("/login")}>
+            Log in
+          </button>
+          <button className={styles.btn_secondary} onClick={() => navigate("/signup")}>
+            Create an account
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

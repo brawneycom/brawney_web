@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@remix-run/react";
 import { MainMenuContext } from "./MainMenuContext";
 import { MainMenu, MenuItem, MenuVisualizationMode } from "~/types";
 import { useAuth } from "../AuthContext";

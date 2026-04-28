@@ -1,4 +1,4 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "brawney-web"
 compatibility_date = "2024-09-10"
-pages_build_output_dir = "./dist"
+pages_build_output_dir = "./build/client"

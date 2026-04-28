@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import dayjs from 'dayjs'
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { Section } from "@bennie-ui/section"
 import { Button } from "@bennie-ui/button";
 
