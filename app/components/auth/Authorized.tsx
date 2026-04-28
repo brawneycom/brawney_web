@@ -1,5 +1,5 @@
 import { FC, useEffect, ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@remix-run/react";
 import { Section } from "@bennie-ui/section";
 import { Header } from "~/components/header";
 import { useAuth, useNotifications } from "~/contexts";
@@ -21,7 +21,7 @@ export const Authorized: FC<AuthorizedProps> = ({ children }) => {
 
   useEffect(() => {
     if (loading == false && error?.message.includes("token expired")) {
-      navigate("/login");
+      navigate("/welcome");
     }
 
     if (loading == false && error?.message.includes("something went wrong")) {

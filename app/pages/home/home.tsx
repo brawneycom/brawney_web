@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart, AxisOptions } from "react-charts";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { Button } from "@bennie-ui/button";
 import { Styles } from "./home.styles";
 import { DailyValue } from "~/types";
