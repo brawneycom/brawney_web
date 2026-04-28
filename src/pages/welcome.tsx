@@ -18,6 +18,21 @@ export function WelcomeScreen() {
       </Section>
 
       <Section flex={{ justifyContent: "center" }}>Logo</Section>
+
+      <Section flex={{ justifyContent: "center", alignItems: "center" }}>
+        <span style={{
+          display: "inline-block",
+          padding: "4px 12px",
+          borderRadius: "9999px",
+          background: "#fef3c7",
+          color: "#92400e",
+          fontSize: "12px",
+          fontWeight: 600,
+          letterSpacing: "0.05em",
+        }}>
+          🚧 Under Construction
+        </span>
+      </Section>
       <Section
         flex={{ justifyContent: "center", alignItems: "center" }}
         height={{ value: "2/6" }}
