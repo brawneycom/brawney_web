@@ -18,7 +18,11 @@ jobs:
           submodules: true
       - uses: oven-sh/setup-bun@v1
       - run: bun i
-      - run: bun run build
+      - name: Build
+        env:
+          VITE_API_URL:  https://api.brawney.com
+          VITE_AUTH_URL: https://auth.brawney.com
+        run: bun run build
       - name: deploy
         uses: cloudflare/pages-action@v1
         with:
