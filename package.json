@@ -19,10 +19,14 @@
     "packages/bennie-ui/components/primitives/*",
     "packages/bennie-ui/components/composites/*",
     "packages/bennie-ui/components/composites/forms/*",
-    "packages/bennie-ui/components/composites/feedback/*"
+    "packages/bennie-ui/components/composites/feedback/*",
+    "packages/bd-shared-ui/components/auth",
+    "packages/bd-shared-ui/themes"
   ],
   "dependencies": {
     "@bennie-ui/button": "workspace:*",
+    "@bd-shared-ui/auth": "workspace:*",
+    "@bd-shared-ui/themes": "workspace:*",
     "@bennie-ui/icons": "workspace:*",
     "@bennie-ui/section": "workspace:*",
     "@bennie-ui/text": "workspace:*",

@@ -1,3 +1,6 @@
 [submodule "packages/bennie-ui"]
 	path = packages/bennie-ui
 	url = https://github.com/bennie-ui/bennie-ui
+[submodule "packages/bd-shared-ui"]
+	path = packages/bd-shared-ui
+	url = file:///home/cbolanos/Projects/bd-shared-ui
