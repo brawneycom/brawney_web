@@ -5,10 +5,6 @@ WORKDIR /app
 # Install libatomic required by @cloudflare/workerd on arm64
 RUN apt-get update && apt-get install -y libatomic1 && rm -rf /var/lib/apt/lists/*
 
-COPY package.json bun.lock ./
-COPY packages/ ./packages/
-RUN NODE_TLS_REJECT_UNAUTHORIZED=0 bun install --frozen-lockfile
-
 COPY . .
 
 # Build-time env vars for local dev
