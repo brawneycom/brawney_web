@@ -6,6 +6,7 @@ export type ViewMode = "graph" | "table";
 type Props = {
   mode: ViewMode;
   onChange: (mode: ViewMode) => void;
+  className?: string;
 };
 
 const styles = {
@@ -55,8 +56,8 @@ const TableIcon = () => (
   </svg>
 );
 
-export const GraphTableToggle: FC<Props> = ({ mode, onChange }) => (
-  <div className={styles.wrapper}>
+export const GraphTableToggle: FC<Props> = ({ mode, onChange, className }) => (
+  <div className={cx(styles.wrapper, className)}>
     <button
       className={cx(styles.btn, mode === "graph" && styles.active)}
       onClick={() => onChange("graph")}
