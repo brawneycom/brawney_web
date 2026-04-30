@@ -1,20 +1,27 @@
 import { FC, useState } from "react";
-import { cx } from "styled-system/css";
+import { css } from "styled-system/css";
 import { Card, CardContent } from "@bennie-ui/card";
-import { MetricChart, CompositionLineChart } from "@bennie-ui/visualization";
+import { MetricChart, CompositionLineChart, useTable } from "@bennie-ui/visualization";
 import { ButtonToggle } from "@bennie-ui/button-toggle";
 import { metrics, weightHistory, recentEntries } from "../dashboard.data";
 import { s } from "./overview.styles";
 
 type ViewMode = "graph" | "table";
+type WeightEntry = { date: string; weight: number; fat: number; lean: number };
 
 const viewOptions = [
   { value: "graph", icon: "PresentationChartLineIcon" as const, label: "Graph" },
   { value: "table", icon: "TableCellsIcon" as const, label: "Table" },
 ];
 
+const deltaStyle = (delta: number) => ({ color: delta <= 0 ? "#22c55e" : "#ef4444" });
+const tdSmall = css({ fontSize: "xs", marginLeft: "4px" });
+
 export const DashboardOverview: FC = () => {
   const [mode, setMode] = useState<ViewMode>("graph");
+
+  const tableData = [...recentEntries].reverse() as WeightEntry[];
+  const { Table, TableCell } = useTable<WeightEntry>(tableData);
 
   return (
     <div className={s.page}>
@@ -49,39 +56,29 @@ export const DashboardOverview: FC = () => {
       ) : (
         <Card title="Recent entries">
           <CardContent>
-            <table className={s.table}>
-              <thead>
-                <tr>
-                  <th className={s.th}>Date</th>
-                  <th className={s.th}>Weight (kg)</th>
-                  <th className={s.th}>Body fat (%)</th>
-                  <th className={s.th}>Lean (kg)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentEntries.map((e) => {
-                  const prev = weightHistory[weightHistory.indexOf(e) + 1];
-                  const delta = prev ? e.weight - prev.weight : 0;
+            <Table data={tableData}>
+              <TableCell name="date" header="Date">
+                {(row) => new Date(row.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+              </TableCell>
+              <TableCell name="weight" header="Weight (kg)">
+                {(row, i, rows) => {
+                  const prev = rows[i + 1];
+                  const delta = prev ? row.weight - prev.weight : 0;
                   return (
-                    <tr key={e.date}>
-                      <td className={s.td}>
-                        {new Date(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                      </td>
-                      <td className={cx(s.td, s.tdValue)}>
-                        {e.weight}{" "}
-                        {prev && (
-                          <span className={delta <= 0 ? s.tdNegative : s.tdPositive}>
-                            ({delta > 0 ? "+" : ""}{delta.toFixed(1)})
-                          </span>
-                        )}
-                      </td>
-                      <td className={s.td}>{e.fat}</td>
-                      <td className={s.td}>{e.lean}</td>
-                    </tr>
+                    <>
+                      {row.weight}
+                      {prev && (
+                        <span className={tdSmall} style={deltaStyle(delta)}>
+                          ({delta > 0 ? "+" : ""}{delta.toFixed(1)})
+                        </span>
+                      )}
+                    </>
                   );
-                })}
-              </tbody>
-            </table>
+                }}
+              </TableCell>
+              <TableCell name="fat" header="Body fat (%)" />
+              <TableCell name="lean" header="Lean (kg)" />
+            </Table>
           </CardContent>
         </Card>
       )}

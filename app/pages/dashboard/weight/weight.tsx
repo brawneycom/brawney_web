@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { cx } from "styled-system/css";
+import { css } from "styled-system/css";
 import { DialInput } from "@bennie-ui/inputs";
 import { WeightAreaChart } from "~/components/charts/area-chart";
 import { weightHistory, filterByRange } from "../dashboard.data";
@@ -7,13 +7,14 @@ import { Card, CardContent } from "@bennie-ui/card";
 import { ButtonGroup } from "@bennie-ui/button-group";
 import { ButtonToggle } from "@bennie-ui/button-toggle";
 import { Page, PageActions, PageContent, PageFooter } from "@bennie-ui/page";
+import { useTable } from "@bennie-ui/visualization";
 import { s } from "./weight.styles";
 
 type ViewMode = "graph" | "table";
 type TimeRange = "1W" | "1M" | "3M" | "1Y";
+type WeightEntry = { date: string; weight: number; fat: number; lean: number };
 
-const timeRangeOptions = (["1W", "1M", "3M", "1Y"] as TimeRange[])
-  .map((r) => ({ value: r, label: r }));
+const timeRangeOptions = (["1W", "1M", "3M", "1Y"] as TimeRange[]).map((r) => ({ value: r, label: r }));
 
 const categoryTabs = [
   { value: "weight", label: "Weight" },
@@ -26,6 +27,9 @@ const viewOptions = [
   { value: "table", icon: "TableCellsIcon" as const, label: "Table" },
 ];
 
+const deltaStyle = (delta: number) => ({ color: delta <= 0 ? "#22c55e" : "#ef4444" });
+const tdSmall = css({ fontSize: "xs", marginLeft: "4px" });
+
 export const WeightDetail: FC = () => {
   const [mode, setMode] = useState<ViewMode>("graph");
   const [range, setRange] = useState<TimeRange>("1M");
@@ -33,18 +37,15 @@ export const WeightDetail: FC = () => {
 
   const filtered = filterByRange(weightHistory, range);
   const latest = weightHistory[weightHistory.length - 1];
+  const tableData = [...filtered].reverse() as WeightEntry[];
+
+  const { Table, TableCell } = useTable<WeightEntry>(tableData);
 
   return (
-    <Page
-      title="Weight"
-      subtitle={`${latest.weight} kg · last entry today`}
-    >
+    <Page title="Weight" subtitle={`${latest.weight} kg · last entry today`}>
       <PageActions>
         <div className={s.controls}>
-          <ButtonToggle
-            options={timeRangeOptions}
-            value={range}
-            onChange={(v) => setRange(v as TimeRange)} />
+          <ButtonToggle options={timeRangeOptions} value={range} onChange={(v) => setRange(v as TimeRange)} />
           <ButtonToggle
             className={s.toggleControls.desktop}
             value={mode}
@@ -56,11 +57,7 @@ export const WeightDetail: FC = () => {
 
       <PageContent>
         <>
-          <ButtonGroup
-            options={categoryTabs}
-            value={activeTab}
-            onChange={setActiveTab}
-          />
+          <ButtonGroup options={categoryTabs} value={activeTab} onChange={setActiveTab} />
           {mode === "graph" ? (
             <div className={s.desktopGrid}>
               <Card title="Weight over time">
@@ -86,41 +83,33 @@ export const WeightDetail: FC = () => {
               </div>
             </div>
           ) : (
-            <div className={s.chartCard}>
-              <table className={s.table}>
-                <thead>
-                  <tr>
-                    <th className={s.th}>Date</th>
-                    <th className={s.th}>Weight (kg)</th>
-                    <th className={s.th}>Body fat (%)</th>
-                    <th className={s.th}>Lean (kg)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...filtered].reverse().map((e, i, arr) => {
-                    const prev = arr[i + 1];
-                    const delta = prev ? e.weight - prev.weight : 0;
-                    return (
-                      <tr key={e.date}>
-                        <td className={s.td}>
-                          {new Date(e.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                        </td>
-                        <td className={cx(s.td, s.tdValue)}>
-                          {e.weight}{" "}
+            <Card title="Recent entries">
+              <CardContent>
+                <Table>
+                  <TableCell name="date" header="Date">
+                    {(row) => new Date(row.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                  </TableCell>
+                  <TableCell name="weight" header="Weight (kg)">
+                    {(row, i, rows) => {
+                      const prev = rows[i + 1];
+                      const delta = prev ? row.weight - prev.weight : 0;
+                      return (
+                        <>
+                          {row.weight}
                           {prev && (
-                            <span className={delta <= 0 ? s.tdNegative : s.tdPositive}>
+                            <span className={tdSmall} style={deltaStyle(delta)}>
                               ({delta > 0 ? "+" : ""}{delta.toFixed(1)})
                             </span>
                           )}
-                        </td>
-                        <td className={s.td}>{e.fat}</td>
-                        <td className={s.td}>{e.lean}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                        </>
+                      );
+                    }}
+                  </TableCell>
+                  <TableCell name="fat" header="Body fat (%)" />
+                  <TableCell name="lean" header="Lean (kg)" />
+                </Table>
+              </CardContent>
+            </Card>
           )}
         </>
       </PageContent>
