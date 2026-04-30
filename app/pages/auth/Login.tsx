@@ -12,7 +12,7 @@ export function LoginScreen() {
       config={brawneyConfig}
       onSuccess={() => {
         refetchMe();
-        navigate("/");
+        navigate("/dashboard");
       }}
       onSignupClick={() => navigate("/signup")}
       onForgotPasswordClick={() => navigate("/forgot-password")}
