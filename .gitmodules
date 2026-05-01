@@ -3,4 +3,4 @@
 	url = https://github.com/bennie-ui/bennie-ui
 [submodule "packages/bd-shared-ui"]
 	path = packages/bd-shared-ui
-	url = file:///home/cbolanos/Projects/bd-shared-ui
+	url = git@github.com:bolanosdevcorp/bd-shared-ui.git
