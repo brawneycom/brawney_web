@@ -1,10 +1,17 @@
-import { SearchProvider } from "~/contexts/SearchContext";
-import { HomeScreen } from "~/pages/home";
+import { useEffect } from "react";
+import { useNavigate } from "@remix-run/react";
+import { useAuth } from "~/contexts";
+import { LandingScreen } from "~/pages/landing/landing";
 
 export default function HomeRoute() {
-  return (
-    <SearchProvider>
-      <HomeScreen />
-    </SearchProvider>
-  );
+  const { me, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && me) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [me, loading, navigate]);
+
+  return <LandingScreen />;
 }

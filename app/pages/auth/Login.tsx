@@ -1,45 +1,24 @@
-import { useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
-import { Text } from "@bennie-ui/text";
-import { Button } from "@bennie-ui/button";
-import { Section } from "@bennie-ui/section";
-import { Page } from "~/components/page";
+import { LoginComponent } from "@bd-shared-ui/auth/login";
+import { brawneyConfig } from "@bd-shared-ui/themes";
 import { useAuth } from "~/contexts";
 
 export function LoginScreen() {
   const navigate = useNavigate();
-  const { me, loading, error, login } = useAuth();
-
-  useEffect(() => {
-    if (me && loading === false && error === null) {
-      navigate("/");
-    }
-  }, [me]);
+  const { fetch: refetchMe } = useAuth();
 
   return (
-    <Page>
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "1/6" }}
-      >
-        <Text size="2xl" weight="bold">
-          Login
-        </Text>
-      </Section>
-
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "2/6" }}
-      >
-        <Button
-          size="sm"
-          padding={{ x: "8", y: "2" }}
-          colors={{ text: { color: "blue" }, background: { color: "white" } }}
-          onClick={login}
-        >
-          Login with Google
-        </Button>
-      </Section>
-    </Page>
+    <LoginComponent
+      config={brawneyConfig}
+      onSuccess={() => {
+        refetchMe();
+        navigate("/dashboard");
+      }}
+      onSignupClick={() => navigate("/signup")}
+      onForgotPasswordClick={() => navigate("/forgot-password")}
+      onGoogleClick={() => {
+        // TODO: wire Google OAuth
+      }}
+    />
   );
 }

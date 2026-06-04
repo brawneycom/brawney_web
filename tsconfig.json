@@ -23,7 +23,10 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "@bd-shared-ui/auth/signup": ["./packages/bd-shared-ui/components/auth/signup/src/index.ts"],
+      "@bd-shared-ui/auth/login": ["./packages/bd-shared-ui/components/auth/login/src/index.ts"],
+      "@bd-shared-ui/themes": ["./packages/bd-shared-ui/themes/src/index.ts"]
     },
     "noEmit": true
   }

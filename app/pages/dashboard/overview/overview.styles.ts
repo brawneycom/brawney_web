@@ -1,0 +1,53 @@
+import { css } from "styled-system/css";
+
+export const s = {
+  page: css({
+    display: "flex",
+    flexDirection: "column",
+    gap: "6",
+    maxWidth: "1100px",
+  }),
+  header: css({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "3",
+  }),
+  pageTitle: css({
+    fontSize: "xl",
+    fontWeight: "700",
+    color: "#F1F5F9",
+  }),
+  metricsRow: css({
+    display: "grid",
+    gridTemplateColumns: { base: "1fr", sm: "repeat(3, 1fr)" },
+    gap: "4",
+  }),
+  table: css({
+    width: "full",
+    borderCollapse: "collapse",
+  }),
+  th: css({
+    textAlign: "left",
+    fontSize: "xs",
+    fontWeight: "600",
+    color: "#475569",
+    textTransform: "uppercase",
+    letterSpacing: "0.05em",
+    paddingBottom: "3",
+    borderBottom: "1px solid #1E1E2E",
+  }),
+  td: css({
+    paddingY: "3",
+    fontSize: "sm",
+    color: "#94A3B8",
+    borderBottom: "1px solid #0D0D1A",
+  }),
+  tdValue: css({
+    color: "#E2E8F0",
+    fontWeight: "600",
+  }),
+  tdPositive: css({ color: "#22C55E" }),
+  tdNegative: css({ color: "#EF4444" }),
+};

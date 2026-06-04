@@ -8,6 +8,8 @@ export default defineConfig({
   include: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./packages/bennie-ui/**/*.{js,jsx,ts,tsx}",
+    "./packages/bd-shared-ui/components/**/*.{js,jsx,ts,tsx}",
+    "./packages/bd-shared-ui/themes/**/*.{js,jsx,ts,tsx}",
   ],
 
   // Files to exclude

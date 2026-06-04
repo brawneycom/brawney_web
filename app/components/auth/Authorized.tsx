@@ -15,13 +15,13 @@ export const Authorized: FC<AuthorizedProps> = ({ children }) => {
 
   useEffect(() => {
     if (me == null && loading == false && error === null && status !== "idle") {
-      navigate("/welcome");
+      navigate("/");
     }
   }, [status, me, loading, error]);
 
   useEffect(() => {
     if (loading == false && error?.message.includes("token expired")) {
-      navigate("/welcome");
+      navigate("/");
     }
 
     if (loading == false && error?.message.includes("something went wrong")) {

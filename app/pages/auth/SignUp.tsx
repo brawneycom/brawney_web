@@ -1,53 +1,23 @@
-import { useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
-import { Text } from "@bennie-ui/text";
-import { Button } from "@bennie-ui/button";
-import { Section } from "@bennie-ui/section";
-import { Page } from "~/components/page";
+import { SignupComponent } from "@bd-shared-ui/auth/signup";
+import { brawneyConfig } from "@bd-shared-ui/themes";
 import { useAuth } from "~/contexts";
-import { SignUpCredentials } from "~/types";
 
 export function SignUpScreen() {
   const navigate = useNavigate();
-
-  const { loading, status, sign_up } = useAuth();
-  useEffect(() => {
-    if (loading === false && status === "done") {
-      navigate("/");
-    }
-  }, [status]);
+  const { fetch: refetchMe } = useAuth();
 
   return (
-    <Page>
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "1/6" }}
-      >
-        <Text size="2xl" weight="bold">
-          Signup
-        </Text>
-      </Section>
-      <Section
-        flex={{ justifyContent: "center", alignItems: "center" }}
-        height={{ value: "2/6" }}
-      >
-        <Button
-          size="sm"
-          padding={{ x: "8", y: "2" }}
-          colors={{ text: { color: "blue" }, background: { color: "white" } }}
-          onClick={() => {
-            const credentials: SignUpCredentials = {
-              firstname: "carlos",
-              lastname: "bolanos",
-              email: "cbolanos2mx@gmail.com",
-              password: "123456",
-            };
-            sign_up(credentials);
-          }}
-        >
-          Signup with Google
-        </Button>
-      </Section>
-    </Page>
+    <SignupComponent
+      config={brawneyConfig}
+      onSuccess={() => {
+        refetchMe();
+        navigate("/");
+      }}
+      onLoginClick={() => navigate("/login")}
+      onGoogleClick={() => {
+        // TODO: wire Google OAuth
+      }}
+    />
   );
 }
